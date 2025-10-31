@@ -486,6 +486,12 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_a6u8h")
+speed = null
+dash_speed = null
+jump_velocity = null
+dash_jump_velocity_x = null
+dash_jump_velocity_y = null
+double_jump_velocity = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3, -26)
@@ -512,7 +518,12 @@ libraries = {
 [node name="Timers" type="Node" parent="."]
 
 [node name="Idle_timer" type="Timer" parent="Timers"]
+<<<<<<< HEAD
 wait_time = 25.0
+=======
+wait_time = 10.0
+one_shot = true
+>>>>>>> parent of 234dcb8 (State changes)
 autostart = true
 
 [node name="Input_Buffer" type="Timer" parent="Timers"]

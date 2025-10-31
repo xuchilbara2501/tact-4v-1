@@ -11,16 +11,16 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update(_delta: float):
-	#Player.HandleIdle()
+func Update():
+	Player.HandleIdle()
 	Player.HorizontalMovement()
-	if (Player.move_direction != 0):
+	if (Player.moveDirectionX != 0):
 		Player.ChangeState(States.Run)
-	elif (Player.move_direction == 0):
+	elif (Player.moveDirectionX == 0):
 		Player.ChangeState(States.Idle)
 	
 	HandleAnimations()
 	
 func HandleAnimations():
 	Player.animationplayer.play("Land") 
-	#Player.HandleFlipH()
+	Player.HandleFlipH()

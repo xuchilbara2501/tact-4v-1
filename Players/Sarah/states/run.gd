@@ -11,26 +11,20 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update(delta: float):
+func Update():
 	#handle movements
 	Player.HorizontalMovement()
 	Player.HandleJump()
-	## Same as gravity??
-	#Player.HandleFalling()
-	Player.HandleGravity(delta)
+	Player.HandleFalling()
 	
-	## Some animation names are wrong? check them all
 	HandleAnimations()
 	HandleIdle()
 	#HandleDash()
-	## NOTE
-	## DONT forget to call move and slide on the update!
-	Player.move_and_slide()
 	
 
 func HandleIdle():
-	if (Player.move_direction == 0):
-		Player.ChangeState(States.Idle)
+	if (Player.moveDirectionX == 0):
+		Player.Changes(States.Idle)
 
 ##func HandleDash():
 	#if Input.is_action_just_pressed("ability") and velocity.x != 0:
@@ -42,5 +36,5 @@ func HandleIdle():
 			
 
 func HandleAnimations():
-	Player.animationplayer.play("run") 
-	#Player.HandleFlipH()
+	Player.animationplayer.play("Run") 
+	Player.HandleFlipH()
