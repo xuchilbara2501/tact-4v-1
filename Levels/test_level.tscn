@@ -1,0 +1,174 @@
+[gd_scene load_steps=5 format=3 uid="uid://wbrev8qf3rrp"]
+
+[ext_resource type="PackedScene" uid="uid://cugta7hcuxc4r" path="res://Players/Sarah/Sarah.tscn" id="1_ormqy"]
+
+[sub_resource type="Gradient" id="Gradient_gbj0n"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ormqy"]
+gradient = SubResource("Gradient_gbj0n")
+width = 32
+height = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00vsl"]
+size = Vector2(32, 32)
+
+[node name="Test_level" type="Node2D"]
+
+[node name="floor" type="Sprite2D" parent="."]
+position = Vector2(815.50006, 664)
+scale = Vector2(64.09375, 4.7499976)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="floor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor/StaticBody2D"]
+scale = Vector2(0.99999994, 1)
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="floor2" type="Sprite2D" parent="."]
+position = Vector2(2797, 660)
+scale = Vector2(43.73438, 4.7499976)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="floor2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2/StaticBody2D"]
+scale = Vector2(0.99999994, 1)
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="ceiling" type="Sprite2D" parent="."]
+position = Vector2(1642.9998, 276.5)
+scale = Vector2(115.81249, 5.28125)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ceiling"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ceiling/StaticBody2D"]
+scale = Vector2(1.0000001, 1)
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="wall" type="Sprite2D" parent="."]
+position = Vector2(-105.00001, 472)
+rotation = -1.5708421
+scale = Vector2(8.601084, 6.671842)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="wall7" type="Sprite2D" parent="."]
+position = Vector2(3390.0002, 480)
+rotation = -1.5708421
+scale = Vector2(8.601084, 6.671842)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall7/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="wall3" type="Sprite2D" parent="."]
+position = Vector2(1279.0001, 375)
+rotation = -1.5708421
+scale = Vector2(8.601084, 1.5293795)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall3/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="wall5" type="Sprite2D" parent="."]
+position = Vector2(2278.0002, 373.00003)
+rotation = -1.5708421
+scale = Vector2(8.601084, 1.5293795)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall5/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="wall6" type="Sprite2D" parent="."]
+position = Vector2(2710.0002, 433.00003)
+rotation = -1.5708421
+scale = Vector2(8.601084, 1.5293795)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall6/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="wall4" type="Sprite2D" parent="."]
+position = Vector2(2409.0007, 563)
+rotation = -1.5708421
+scale = Vector2(8.601084, 1.5293795)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="wall4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall4/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="slope" type="Sprite2D" parent="."]
+position = Vector2(698.2071, 607.16815)
+rotation = -0.40370876
+scale = Vector2(9.744196, 4.9116955)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="slope"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="slope/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="block" type="Sprite2D" parent="."]
+position = Vector2(249.96442, 568.99994)
+rotation = -1.5708421
+scale = Vector2(2.4928253, 2.5601625)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="block"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="block2" type="Sprite2D" parent="."]
+position = Vector2(457.96432, 542)
+rotation = -1.5708421
+scale = Vector2(3.892289, 3.8139665)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="block2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="block3" type="Sprite2D" parent="."]
+position = Vector2(983.52795, 535.99475)
+rotation = -1.5708421
+scale = Vector2(3.892289, 10.841521)
+texture = SubResource("GradientTexture2D_ormqy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="block3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block3/StaticBody2D"]
+scale = Vector2(0.99999994, 1)
+shape = SubResource("RectangleShape2D_00vsl")
+
+[node name="Sarah" parent="." instance=ExtResource("1_ormqy")]
+position = Vector2(76, 550)
+speed = null
+double_jump_velocity = null
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sarah"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(76, 550)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
