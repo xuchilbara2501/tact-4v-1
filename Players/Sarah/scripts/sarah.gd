@@ -48,8 +48,9 @@ var previous_state = null
 func _ready():
 	#initialize state machine
 	for state in States.get_children():
-		state.States = States
-		state.Player = self
+		if state is PlayerState:
+			state.States = States
+			state.Player = self
 	previous_state = States.Fall
 	current_state = States.Fall
 	
@@ -73,6 +74,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		
+	move_and_slide()
 		
 func ChangeState(new_state):
 	if (new_state != null):
