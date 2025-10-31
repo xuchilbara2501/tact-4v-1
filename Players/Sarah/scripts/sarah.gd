@@ -146,7 +146,7 @@ func HandleLanding():
 		ChangeState(States.Idle)
 
 
-func HandleGravity(delta, gravity: float = Gravity):
+func HandleGravity(delta):
 	if (!is_on_floor()):
 		velocity.y += Gravity * delta
 

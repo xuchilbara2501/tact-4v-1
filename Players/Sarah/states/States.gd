@@ -6,5 +6,4 @@ extends Node
 @onready var Jump = $Jump
 @onready var Fall = $Fall
 @onready var Land = $Land
-@Onready var Prone = $Prone
 @onready var Slide = $Slide

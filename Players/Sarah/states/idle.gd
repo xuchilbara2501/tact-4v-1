@@ -16,16 +16,16 @@ func Update():
 	if (Player.moveDirectionX != 0):
 		Player.ChangeState(States.Run)
 	
-	HandleDodge()
+	#HandleDodge()
 	HandleAnimations()
 	
-func HandleDodge()
-	if Input.is_action_just_pressed("ability") and velocity.is_zero_approx():
-		can_dash = false
-		dash_timer = dash_time
-		velocity.x = dash_speed * -look_dir_x
-		velocity.y = 0
-		AnimationPlayer.play("dodge")
+#func HandleDodge()
+	#if Input.is_action_just_pressed("ability") and velocity.is_zero_approx():
+		#can_dash = false
+		#dash_timer = dash_time
+		#velocity.x = dash_speed * -look_dir_x
+		#velocity.y = 0
+		#AnimationPlayer.play("dodge")
 	
 
 func HandleAnimations():
