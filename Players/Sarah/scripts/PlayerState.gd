@@ -1,8 +1,8 @@
 class_name PlayerState
 extends Node
 
-var States = null
-var Player = null
+var States : states = null
+var Player : player_character = null
 var Name: String = "NULL"
 
 func EnterState():
@@ -14,5 +14,5 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update():
+func Update(_delta: float):
 	pass
