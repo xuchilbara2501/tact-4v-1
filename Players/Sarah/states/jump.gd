@@ -1,5 +1,7 @@
 extends PlayerState
 
+#Jump/Wall Jump State should handle double jump and air dash
+
 func EnterState():
 	name = "Jump"
 	Player.velocity.y = Player.jump_velocity

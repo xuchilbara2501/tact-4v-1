@@ -1,5 +1,7 @@
 extends PlayerState
 
+#resets back to the grounded states...may need animation lock?
+
 func EnterState():
 	name = "Land"
 

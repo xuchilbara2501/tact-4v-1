@@ -1,5 +1,7 @@
 extends PlayerState
 
+#When not jumping and falling
+
 func EnterState():
 	name = "Fall"
 

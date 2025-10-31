@@ -1,5 +1,9 @@
 extends PlayerState
 
+#Idle State
+#Should handle "dodge" ability since 0 movement and can clide 
+#Idle animation timeout timer?
+
 func EnterState():
 	pass
 	

@@ -29,6 +29,8 @@ script = ExtResource("6_pwvtb")
 [node name="Land" type="Node" parent="."]
 script = ExtResource("7_r0him")
 
+[node name="Prone" type="Node" parent="."]
+
 [node name="Slide" type="Node" parent="."]
 
-[node name="Prone" type="Node" parent="."]
+[node name="Up" type="Node" parent="."]

@@ -6,7 +6,6 @@ extends CharacterBody2D
 @onready var Normal_Collision = $normal_collision
 @onready var Sliding_Collision = $sliding_collision
 @onready var animationplayer = $AnimationPlayer
-@onready var Idle_timer = $Idle_timer
 @onready var States = $StateMachine
 
 #Physics Variables
@@ -54,7 +53,6 @@ func _ready():
 	previous_state = States.Fall
 	current_state = States.Fall
 	
-	Idle_timer.start()
 	animationplayer.play("idle")
 	
 func _draw():
@@ -160,7 +158,7 @@ func HandleAnimation():
 			animationplayer.play("run")
 		else: 
 			animationplayer.play("idle")
-			Idle_timer.start()
+	
 		
 	else:
 		if (velocity.y < 0):
@@ -178,7 +176,6 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "idle_timeout":
 		animationplayer.play("idle")
 	#restart timer
-	Idle_timer.start()
 	
 #endregion
 	

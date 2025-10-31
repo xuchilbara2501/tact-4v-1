@@ -1,5 +1,7 @@
 extends PlayerState
 
+#For Cutscenes or other Resources
+
 func EnterState():
 	name = "Locked"
 

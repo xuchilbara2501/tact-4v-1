@@ -1,5 +1,7 @@
 extends PlayerState
 
+#main movement state, should hand "dash" and "slide" - shoudln't need dodge bnecause dodge is no x movement input?
+
 func EnterState():
 	Name = "Run"
 	
