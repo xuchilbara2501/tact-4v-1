@@ -13,11 +13,11 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update():
-	Player.HandleFalling()
+func Update(delta: float):
+	#Player.HandleFalling()
 	Player.HandleJump()
 	Player.HorizontalMovement()
-	if (Player.moveDirectionX != 0):
+	if (Player.move_direction != 0):
 		Player.ChangeState(States.Run)
 	
 	#HandleDodge()
@@ -34,4 +34,4 @@ func Update():
 
 func HandleAnimations():
 	Player.animationplayer.play("idle") 
-	Player.HandleFlipH()
+	#Player.HandleFlipH()

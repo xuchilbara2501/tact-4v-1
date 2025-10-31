@@ -486,12 +486,6 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_a6u8h")
-speed = null
-dash_speed = null
-jump_velocity = null
-dash_jump_velocity_x = null
-dash_jump_velocity_y = null
-double_jump_velocity = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3, -26)
@@ -519,12 +513,27 @@ libraries = {
 
 [node name="Idle_timer" type="Timer" parent="Timers"]
 wait_time = 10.0
-one_shot = true
 autostart = true
 
 [node name="Input_Buffer" type="Timer" parent="Timers"]
 
 [node name="Coyote_Timer" type="Timer" parent="Timers"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="state_label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -72.0
+offset_right = 32.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timers/Idle_timer" to="." method="_on_idle_timeout_timeout"]

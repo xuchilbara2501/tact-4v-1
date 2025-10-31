@@ -21,6 +21,7 @@ scale = Vector2(64.09375, 4.7499976)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="floor"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor/StaticBody2D"]
 scale = Vector2(0.99999994, 1)
@@ -32,6 +33,7 @@ scale = Vector2(43.73438, 4.7499976)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="floor2"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor2/StaticBody2D"]
 scale = Vector2(0.99999994, 1)
@@ -43,6 +45,7 @@ scale = Vector2(115.81249, 5.28125)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ceiling"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ceiling/StaticBody2D"]
 scale = Vector2(1.0000001, 1)
@@ -55,6 +58,7 @@ scale = Vector2(8.601084, 6.671842)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -66,6 +70,7 @@ scale = Vector2(8.601084, 6.671842)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall7"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall7/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -77,6 +82,7 @@ scale = Vector2(8.601084, 1.5293795)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall3"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall3/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -88,6 +94,7 @@ scale = Vector2(8.601084, 1.5293795)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall5"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall5/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -99,6 +106,7 @@ scale = Vector2(8.601084, 1.5293795)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall6"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall6/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -110,6 +118,7 @@ scale = Vector2(8.601084, 1.5293795)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="wall4"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall4/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -121,6 +130,7 @@ scale = Vector2(9.744196, 4.9116955)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="slope"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slope/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -132,6 +142,7 @@ scale = Vector2(2.4928253, 2.5601625)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="block"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -143,6 +154,7 @@ scale = Vector2(3.892289, 3.8139665)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="block2"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block2/StaticBody2D"]
 shape = SubResource("RectangleShape2D_00vsl")
@@ -154,6 +166,7 @@ scale = Vector2(3.892289, 10.841521)
 texture = SubResource("GradientTexture2D_ormqy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="block3"]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block3/StaticBody2D"]
 scale = Vector2(0.99999994, 1)
@@ -161,14 +174,3 @@ shape = SubResource("RectangleShape2D_00vsl")
 
 [node name="Sarah" parent="." instance=ExtResource("1_ormqy")]
 position = Vector2(76, 550)
-speed = null
-double_jump_velocity = null
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sarah"]
-remote_path = NodePath("../../Camera2D")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(76, 550)
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true

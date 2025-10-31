@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmxmm5b7qaecp"]
+
+[ext_resource type="Script" uid="uid://dc1y1t1eeftsm" path="res://Players/Sarah/states/States.gd" id="1_dngjt"]
+[ext_resource type="Script" uid="uid://dev3jyrb6520i" path="res://Players/Sarah/states/locked.gd" id="2_25n84"]
+[ext_resource type="Script" uid="uid://brrmrhw1rdpsr" path="res://Players/Sarah/states/idle.gd" id="3_t5xmr"]
+[ext_resource type="Script" uid="uid://0msmk5yskla5" path="res://Players/Sarah/states/run.gd" id="4_t5s11"]
+[ext_resource type="Script" uid="uid://8hpkhbwvmfrv" path="res://Players/Sarah/states/jump.gd" id="5_m50mj"]
+[ext_resource type="Script" uid="uid://ctbb4ofg3i42o" path="res://Players/Sarah/states/fall.gd" id="6_pwvtb"]
+[ext_resource type="Script" uid="uid://dv3nvnqmve11n" path="res://Players/Sarah/states/land.gd" id="7_r0him"]
+
+[node name="StateMachine" type="Node"]
+script = ExtResource("1_dngjt")
+
+[node name="Locked" type="Node" parent="."]
+script = ExtResource("2_25n84")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("3_t5xmr")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("4_t5s11")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("5_m50mj")
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("6_pwvtb")
+
+[node name="Land" type="Node" parent="."]
+script = ExtResource("7_r0him")
+
+[node name="Prone" type="Node" parent="."]
+
+[node name="Slide" type="Node" parent="."]
+
+[node name="Up" type="Node" parent="."]
