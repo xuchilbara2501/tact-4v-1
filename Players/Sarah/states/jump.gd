@@ -12,8 +12,8 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update(delta: float):
-	Player.HandleGravity(delta)
+func Update():
+	Player.HandleGravity()
 	Player.HorizontalMovement()
 	
 	HandleJumpToFall()
@@ -25,4 +25,4 @@ func HandleJumpToFall():
 		
 func HandleAnimations():
 	Player.animationplayer.play("jump") 
-	#Player.HandleFlipH()
+	Player.HandleFlipH()

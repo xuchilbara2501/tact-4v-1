@@ -11,5 +11,5 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update(_delta: float):
+func Update():
 	pass
