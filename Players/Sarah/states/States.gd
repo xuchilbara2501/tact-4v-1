@@ -7,4 +7,3 @@ extends Node
 @onready var Jump = $Jump
 @onready var Fall = $Fall
 @onready var Land = $Land
-@onready var Slide = $Slide

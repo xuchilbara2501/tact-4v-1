@@ -1,7 +1,7 @@
 extends PlayerState
 
 #Idle State
-#Should handle "dodge" ability since 0 movement and can clide 
+#Should handle "dodge" ability since 0 movement and can slide 
 #Idle animation timeout timer?
 
 func EnterState():
@@ -13,12 +13,17 @@ func ExitState():
 func Draw():
 	pass
 	
-func Update():
-	Player.HandleFalling()
+func Update(delta: float):
+	
 	Player.HandleJump()
 	Player.HorizontalMovement()
-	if (Player.moveDirectionX != 0):
+	
+	if (Player.move_direction != 0):
 		Player.ChangeState(States.Run)
+	elif Input.is_action_pressed("jump"):
+		Player.ChangeState(States.Jump)
+		
+	Player.move_and_slide()
 	
 	#HandleDodge()
 	HandleAnimations()
@@ -27,11 +32,10 @@ func Update():
 	#if Input.is_action_just_pressed("ability") and velocity.is_zero_approx():
 		#can_dash = false
 		#dash_timer = dash_time
-		#velocity.x = dash_speed * -look_dir_x
+		#velocity.x = dash_speed * -move_direction
 		#velocity.y = 0
-		#AnimationPlayer.play("dodge")
+		#Player.animationplayer.play("dodge") 
 	
 
 func HandleAnimations():
 	Player.animationplayer.play("idle") 
-	Player.HandleFlipH()

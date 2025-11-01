@@ -1,12 +1,13 @@
 extends CharacterBody2D
+class_name player_character
 
 #region /// Player Variables
 #Character Nodes
-@onready var Sprite = $Sprite2D
-@onready var Normal_Collision = $normal_collision
-@onready var Sliding_Collision = $sliding_collision
-@onready var animationplayer = $AnimationPlayer
-@onready var States = $StateMachine
+@onready var Sprite : Sprite2D = $Sprite2D
+@onready var Normal_Collision : CollisionShape2D = $normal_collision
+@onready var Sliding_Collision : CollisionShape2D = $sliding_collision
+@onready var animationplayer : AnimationPlayer = $AnimationPlayer
+@onready var States :  = $StateMachine
 
 #Physics Variables
 const Gravity = 300
@@ -18,29 +19,29 @@ const Gravity = 300
 @export var double_jump_velocity : float = -250
 
 var move_speed = speed
+var can_dash : bool = false
 var move_direction = 0
 var has_double_jumped : bool = false
 var facing = 1 
 
 #Input Variables
-var up = false
-var down = false
-var left = false
-var right = false
-var up_Pressed = false
-var down_Pressed = false
-var jump = false
-var jump_Pressed = false
-var ability = false
-var ability_Pressed = false
-var shoot = false
-var shoot_Pressed = false
-var oversoul = false
+var up : bool = false
+var down : bool = false
+var left : bool = false
+var right : bool = false
+var up_Pressed : bool = false
+var down_Pressed : bool = false
+var jump : bool = false
+var jump_Pressed : bool = false
+var ability: bool  = false
+var ability_Pressed : bool = false
+var shoot : bool = false
+var shoot_Pressed: bool  = false
+var oversoul : bool = false
 
 # State Machine
-var current_state = null
-var previous_state = null
-
+var current_state : PlayerState = null
+var previous_state : PlayerState = null
 #endregion
 
 #region /// Main Loop Functions
@@ -54,28 +55,35 @@ func _ready():
 	previous_state = States.Fall
 	current_state = States.Fall
 	
-	animationplayer.play("idle")
+	## Enter the initial STate!! 
+	current_state.EnterState()
 	
-func _draw():
-	current_state.Draw()
+#func _draw():
+	#current_state.Draw()
 	
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
-
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		
-	move_and_slide()
+	
+	## NOTE
+	## Run the Update process of the active state!
+	if current_state:
+		current_state.Update(delta)
+	
+	## Add the gravity.
+	#if not is_on_floor():
+		#velocity += get_gravity() * delta
+#
+	## Handle jump.
+	#if Input.is_action_just_pressed("jump") and is_on_floor():
+		#velocity.y = jump_velocity
+#
+	## Get the input direction and handle the movement/deceleration.
+	#var direction := Input.get_axis("left", "right")
+	#if direction:
+		#velocity.x = direction * speed
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, speed)
+		#
+	#move_and_slide()
 		
 func ChangeState(new_state):
 	if (new_state != null):
@@ -83,28 +91,28 @@ func ChangeState(new_state):
 		current_state = new_state
 		previous_state.ExitState()
 		current_state.EnterState()
-		print("State Change From: " + previous_state.Name + " to: " + current_state.Name)
+		print("State Change From: " + previous_state.name + " to: " + current_state.name)
 		
 		
-	GetInputStates()
-		
-	#Handles Horizontal Movement
-	HorizontalMovement()
-	
-	#Handle Gravity
-	#HandleGravity(delta)
-	
-	#handle Jumps
-	HandleJump()
-	
-	#Update current state
-	current_state.Update()
-	
-	#Commit Movements
-	move_and_slide()
-	
-	#Handle Animaitons
-	HandleAnimation()
+	#GetInputStates()
+		#
+	##Handles Horizontal Movement
+	#HorizontalMovement()
+	#
+	##Handle Gravity
+	##HandleGravity(delta)
+	#
+	##handle Jumps
+	#HandleJump()
+	#
+	##Update current state
+	#current_state.Update()
+	#
+	##Commit Movements
+	#move_and_slide()
+	#
+	##Handle Animaitons
+	#HandleAnimation()
 	
 	#endregion
 	
@@ -129,7 +137,11 @@ func GetInputStates():
 	
 func HorizontalMovement():
 	move_direction = Input.get_axis("left", "right")
-	velocity.x = move_toward(velocity.x, move_direction, speed)
+	#velocity.x = move_toward(velocity.x, move_direction, speed)
+	velocity.x = speed * move_direction
+	
+	if velocity.x:
+		$Sprite2D.flip_h = velocity.x < 0
 
 func HandleJump():
 	if (jump_Pressed):
@@ -146,12 +158,10 @@ func HandleLanding():
 		has_double_jumped = false
 		ChangeState(States.Idle)
 
-
 func HandleGravity(delta):
 	if (!is_on_floor()):
 		velocity.y += Gravity * delta
 
-	
 func HandleAnimation():
 	#Flip the sprite
 	Sprite.flip_h = (facing < 0)
@@ -168,6 +178,7 @@ func HandleAnimation():
 			animationplayer.play("jump")
 		else:
 			animationplayer.play("falling")
+			
 	
 func _on_idle_timeout_timeout():
 	#When the timer times out, play the second idle animation
