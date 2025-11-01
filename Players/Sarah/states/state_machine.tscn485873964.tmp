@@ -17,9 +17,6 @@ script = ExtResource("2_25n84")
 [node name="Idle" type="Node" parent="."]
 script = ExtResource("3_t5xmr")
 
-[node name="idle_timeout" type="Timer" parent="Idle"]
-one_shot = true
-
 [node name="Run" type="Node" parent="."]
 script = ExtResource("4_t5s11")
 
@@ -37,5 +34,3 @@ script = ExtResource("7_r0him")
 [node name="Slide" type="Node" parent="."]
 
 [node name="Up" type="Node" parent="."]
-
-[connection signal="timeout" from="Idle/idle_timeout" to="Idle" method="_on_idle_timeout_timeout"]

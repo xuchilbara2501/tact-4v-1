@@ -1,6 +1,18 @@
 extends CharacterBody2D
 class_name player_character
 
+## NOTE
+## General notes, animation player interpolation mode (the upwards arrow on the right side of each track) needs to be set
+## to nearest (squared white option) for sprite frames (this causes the animator to snap to that frame) if you leave it
+## as linear (default), the animator will play ALL the frames in between so when looping back it will look janky
+
+## You can put all reusable funcs in here such as HandleJump, HandleGravity etc, and just call them on the corresponding
+## update function of each state that uses them, just make sure to call what you need, like gravity, inputs, jump etc
+## also DONT forget to call MOVE_AND_SLIDE() at the end of any state that moves in its UPDATE function
+
+## You dont need a HandleAnimations function, remember that when entering a state, you can just play the animation for
+## that state once and the next state will automatically play theirs and so on
+
 #region /// Player Variables
 #Character Nodes
 @onready var Sprite : Sprite2D = $Sprite2D
@@ -8,18 +20,23 @@ class_name player_character
 @onready var Sliding_Collision : CollisionShape2D = $sliding_collision
 @onready var animationplayer : AnimationPlayer = $AnimationPlayer
 @onready var States :  = $StateMachine
+@onready var state_label: Label = $state_label
+
 
 #Physics Variables
-const Gravity = 300
+const Gravity : float = 600
 @export var speed : float = 200.0 # Base horizontal movement speed
 @export var dash_speed : float = 800.0 
-@export var jump_velocity : float = -350.0 # Maximum jump strength
+@export var jump_velocity : float = -300.0 # Maximum jump strength
 @export var dash_jump_velocity_x : float = 800.0
 @export var dash_jump_velocity_y : float = -300 
 @export var double_jump_velocity : float = -250
 
+## How hard it falls to land, play around with this and gravity to achieve the feel you wantd 
+const hard_land_threshold: float = 400.0
+var fall_velocity: float = 0.0
+
 var move_speed = speed
-var can_dash : bool = false
 var move_direction = 0
 var has_double_jumped : bool = false
 var facing = 1 
@@ -42,6 +59,10 @@ var oversoul : bool = false
 # State Machine
 var current_state : PlayerState = null
 var previous_state : PlayerState = null
+
+## Signals used in states
+signal finished_landing
+
 #endregion
 
 #region /// Main Loop Functions
@@ -55,64 +76,31 @@ func _ready():
 	previous_state = States.Fall
 	current_state = States.Fall
 	
-	## Enter the initial STate!! 
+	## ENTER the initial state!! (fall)
 	current_state.EnterState()
-	
-#func _draw():
-	#current_state.Draw()
-	
+
 func _physics_process(delta: float) -> void:
-	
 	## NOTE
 	## Run the Update process of the active state!
 	if current_state:
+		state_label.text = current_state.name
 		current_state.Update(delta)
-	
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("jump") and is_on_floor():
-		#velocity.y = jump_velocity
-#
-	## Get the input direction and handle the movement/deceleration.
-	#var direction := Input.get_axis("left", "right")
-	#if direction:
-		#velocity.x = direction * speed
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, speed)
-		#
-	#move_and_slide()
-		
+		# Flip sprite
+		if facing == 1:
+			Sprite.flip_h = false
+		else:
+			Sprite.flip_h = true
+
+## NOTE this function ONLY changes a state from A to B, nothing else , UPDATE on each state handles the
+## behaivour no need to do it here!
 func ChangeState(new_state):
 	if (new_state != null):
 		previous_state = current_state
 		current_state = new_state
 		previous_state.ExitState()
 		current_state.EnterState()
+		## NOTE .name not Name, typo was causing this to be NULL
 		print("State Change From: " + previous_state.name + " to: " + current_state.name)
-		
-		
-	#GetInputStates()
-		#
-	##Handles Horizontal Movement
-	#HorizontalMovement()
-	#
-	##Handle Gravity
-	##HandleGravity(delta)
-	#
-	##handle Jumps
-	#HandleJump()
-	#
-	##Update current state
-	#current_state.Update()
-	#
-	##Commit Movements
-	#move_and_slide()
-	#
-	##Handle Animaitons
-	#HandleAnimation()
 	
 	#endregion
 	
@@ -139,57 +127,53 @@ func HorizontalMovement():
 	move_direction = Input.get_axis("left", "right")
 	#velocity.x = move_toward(velocity.x, move_direction, speed)
 	velocity.x = speed * move_direction
-	
-	if velocity.x:
-		$Sprite2D.flip_h = velocity.x < 0
+
+func HandleFall():
+	if not is_on_floor():
+		if velocity.y >= 0:
+			ChangeState(States.Fall)
 
 func HandleJump():
-	if (jump_Pressed):
+	if jump_Pressed:
 		if is_on_floor():
 			#normal jump
-			velocity.y = jump_velocity
-		elif not has_double_jumped:
+			ChangeState(States.Jump)
+		else:
 			#double jump in air
-			velocity.y = double_jump_velocity 
-			has_double_jumped = true
+			if not has_double_jumped:
+				ChangeState(States.Jump)
+				has_double_jumped = true
+		return
 
-func HandleLanding():
-	if (is_on_floor()):
+## Landing from a fall
+func HandleFalltoLand():
+	if is_on_floor():
 		has_double_jumped = false
-		ChangeState(States.Idle)
+		## NOTE this is not neccesary depends on how you want land to behave, here for example, if youre falling
+		## too fast, it will land, but if its a soft landing, it will idle instead
+		print("Falling with velocity of ",fall_velocity)
+		if fall_velocity > hard_land_threshold:
+			ChangeState(States.Land)
+		else:
+			ChangeState(States.Idle)
+
+#func HandleDash():
+	#if Input.is_action_just_pressed("ability") and velocity.x != 0:
+		#can_dash = false
+		#dash_timer = dash_time
+		#velocity.x = dash_speed * look_dir_x
+		#velocity.y = 0
+		#AnimationPlayer.play("dash")
 
 func HandleGravity(delta):
 	if (!is_on_floor()):
 		velocity.y += Gravity * delta
-
-func HandleAnimation():
-	#Flip the sprite
-	Sprite.flip_h = (facing < 0)
-	
-	if(is_on_floor()):
-		if (velocity.x !=0):
-			animationplayer.play("run")
-		else: 
-			animationplayer.play("idle")
-	
-		
-	else:
-		if (velocity.y < 0):
-			animationplayer.play("jump")
-		else:
-			animationplayer.play("falling")
-			
-	
-func _on_idle_timeout_timeout():
-	#When the timer times out, play the second idle animation
-	animationplayer.play("idle_timeout")
-
+		fall_velocity = velocity.y
 
 func _on_animation_player_animation_finished(anim_name):
-	#If the secondary idle animation finishes, return to default idle
-	if anim_name == "idle_timeout":
-		animationplayer.play("idle")
+	if anim_name == "Land":
+		finished_landing.emit()
 	#restart timer
-	
+
 #endregion
 	
