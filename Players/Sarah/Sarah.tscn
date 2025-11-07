@@ -489,6 +489,12 @@ floor_stop_on_slope = false
 floor_constant_speed = true
 floor_snap_length = 6.0
 script = ExtResource("1_a6u8h")
+speed = null
+dash_speed = null
+jump_velocity = null
+dash_jump_velocity_x = null
+dash_jump_velocity_y = null
+double_jump_velocity = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3, -26)

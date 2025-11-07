@@ -32,6 +32,18 @@ const Gravity : float = 600
 @export var dash_jump_velocity_y : float = -300 
 @export var double_jump_velocity : float = -250
 
+#Dash Variables
+const dash_time: float = 2.0
+var can_dash: bool = true
+var is_dashing: bool = false
+var can_dodge: bool = true
+var dash_timer: float = 0.5
+const slide_speed : float = 800.0
+const slide_time: float = 0.12
+var can_slide: bool = true #checks is sliding available
+var is_sliding: bool = false #checks if sliding
+var slide_timer: float = 0.0
+
 ## How hard it falls to land, play around with this and gravity to achieve the feel you wantd 
 const hard_land_threshold: float = 400.0
 var fall_velocity: float = 0.0
@@ -90,6 +102,13 @@ func _physics_process(delta: float) -> void:
 			Sprite.flip_h = false
 		else:
 			Sprite.flip_h = true
+			
+	#_dash_logic(delta)
+	#
+		#if is_on_floor_only():
+			#if dash_timer == 0.0:
+				#can_dash = true
+			
 
 ## NOTE this function ONLY changes a state from A to B, nothing else , UPDATE on each state handles the
 ## behaivour no need to do it here!
@@ -157,13 +176,34 @@ func HandleFalltoLand():
 		else:
 			ChangeState(States.Idle)
 
-#func HandleDash():
-	#if Input.is_action_just_pressed("ability") and velocity.x != 0:
-		#can_dash = false
-		#dash_timer = dash_time
-		#velocity.x = dash_speed * look_dir_x
-		#velocity.y = 0
-		#AnimationPlayer.play("dash")
+func HandleDodge():
+	if Input.is_action_just_pressed("ability") and can_dash:
+		if velocity.is_zero_approx():
+			can_dash = false
+			dash_timer = dash_time
+			velocity.x = dash_speed * -facing
+			velocity.y = 0
+			animationplayer.play("dodge")
+		elif is_on_floor_only():
+			if dash_timer == 0.0:
+				can_dash = true
+
+func HandleDash():
+	if Input.is_action_just_pressed("ability") and can_dash:		
+		can_dash = false
+		dash_timer = dash_time
+		velocity.x = dash_speed * facing
+		velocity.y = 0
+		animationplayer.play("dash")
+	elif is_on_floor_only():
+			if dash_timer == 0.0:
+				can_dash = true
+				#
+#func HandleSlide():
+	#if Input.is
+			
+			
+				
 
 func HandleGravity(delta):
 	if (!is_on_floor()):
