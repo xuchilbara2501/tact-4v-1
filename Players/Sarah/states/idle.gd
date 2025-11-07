@@ -20,6 +20,7 @@ func Update(delta: float):
 	Player.HorizontalMovement()
 	if (Player.move_direction != 0):
 		Player.ChangeState(States.Run)
+	Player._dash_logic()
 	Player.HandleDodge()	
 	Player.HandleFall()
 	Player.move_and_slide()

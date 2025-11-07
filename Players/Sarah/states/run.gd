@@ -17,7 +17,8 @@ func Update(delta: float):
 	Player.GetInputStates()
 	Player.HorizontalMovement()
 	Player.HandleJump()
-	Player.HandleDash()
+	Player._dash_logic()
+	Player.HandleDodge()
 	## Same as gravity??
 	
 	Player.HandleFall()

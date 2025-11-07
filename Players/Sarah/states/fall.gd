@@ -18,6 +18,6 @@ func Update(delta: float):
 	Player.HandleGravity(delta)
 	Player.HorizontalMovement()
 	Player.HandleFalltoLand()
-	
+	Player.HandleDodge()
 	Player.HandleFalltoLand()
 	Player.move_and_slide()
