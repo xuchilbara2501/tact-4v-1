@@ -502,10 +502,12 @@ texture = ExtResource("1_v1bff")
 hframes = 9
 
 [node name="normal_collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_myb4v")
 
 [node name="sliding_collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1.1920929e-07, -9.000001)
 rotation = 1.5717139
 shape = SubResource("CapsuleShape2D_voamc")
